@@ -32,7 +32,7 @@ FROM base AS build
 
 # Install packages needed to build gems
 RUN apt-get update -qq && \
-    apt-get install --no-install-recommends -y build-essential git libyaml-dev pkg-config && \
+   apt-get install --no-install-recommends -y build-essential git libyaml-dev pkg-config libxml2-dev libxslt-dev && \
     rm -rf /var/lib/apt/lists /var/cache/apt/archives
 
 # Install application gems
@@ -56,7 +56,7 @@ RUN chmod +x bin/* && \
     sed -i 's/ruby\.exe$/ruby/' bin/*
 
 
-
+RUN apt-get update -qq && apt-get install -y libxml2-dev libxslt-dev
 
 # Final stage for app image
 FROM base
